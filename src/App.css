@@ -54,3 +54,7 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
+p{
+  justify-content: center;
+  align-items: center;
+}

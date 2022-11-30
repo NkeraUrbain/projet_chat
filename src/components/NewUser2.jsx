@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import '../App.css'
 
 function NewUser2() {
     let mabase= 'http://localhost:4100/utilisateur/newUser'
@@ -57,6 +57,7 @@ let handleSubmit = async (e) => {
             />
     
             <button type="submit" >Create</button>
+            <p>Allready Registered?<a href='/login'>LOGIN</a></p>
     
             <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>

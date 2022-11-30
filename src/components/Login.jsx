@@ -1,10 +1,13 @@
 import React , {useState}from 'react'
 import '../App.css'
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   let mabase= 'http://localhost:4100/utilisateur/Login'
   let handleSubmit = async (e) => {
@@ -29,7 +32,7 @@ const Login = () => {
       // } else {
       //   setMessage("Some error occured");
       // }
-      setMessage(resJson)
+      navigate('/envoiMessage')
     } catch (err) {
       console.log(err)
     }
@@ -42,7 +45,8 @@ const Login = () => {
          <label>password</label>
          <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
          <button type='submit'>Login</button>
-         <div className="message">{message ? <p>{message}</p> : null}</div>
+         <p> Don't have an account? <a href='/newuser2'>CREATE</a></p>
+      {/* <div className="message">{message ? <p>{message}</p> : null}</div> */}
       </form>
     </div>
   )
