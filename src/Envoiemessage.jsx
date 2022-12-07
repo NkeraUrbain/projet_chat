@@ -1,13 +1,14 @@
 import React, {useEffect,useState} from 'react'
 import { json } from 'react-router-dom'
-
+import './App.css';
 
 
 const  Envoiemessage = () =>  {
   const [user,setUser] = useState('')
   const[allUsers, setAllUsers]=useState([])
   const[messages, setMessages]=useState([]);
-  
+  const[selectedUser, setSelectedUser]= useState(null);
+
   let afficherUtilisateurs = async () => {
     let utilisateurs='http://localhost:4100/utilisateur/details'
     try {
@@ -42,6 +43,11 @@ const  Envoiemessage = () =>  {
   console.log(error);
 }
 }
+
+const selectUser=(elected)=>{
+    setSelectedUser(elected)
+}
+
 useEffect(() => {
   if (window.localStorage !== undefined) {
     const data = window.localStorage.getItem('user');
@@ -56,33 +62,36 @@ useEffect(() => {
 console.log(messages);
 return (
   <main className='border-10px'>
-    <div className='d-flex form-control w-50'>
-        <div className=' d-flex flex-column '>
+    <div className='d-flex form-control w-100'>
+        <div className=' d-flex flex-column w-50'>
           <p className='text-primary text-uppercase'> Formulaire d'envoie Message</p>
           <p> Utilisateur connecté:{user.username}</p>
-          <ol>List Users:
+          <ol >List Users:
             {allUsers.map((user)=>( 
-              <li key={user._id}><a href="#">{user.username}</a></li>
+              <li key={user._id} onClick={()=>{selectUser(user)}}>{user.username}</li>
             ))}
           </ol>
-          <button className='btn-primary btn m-1'> Message de...</button>
-          <textarea className='text-center'  placeholder='Votre Message ici'></textarea>
-          <button type='button' className='btn-primary'>Envoi message</button>
+          
         </div>
 
-      <div className='d-flex flex-column form-control w-50 '>
-         <ol>
-          liste message:
-          { messages.length > 0 ?
-              messages.map((message)=>( 
-                <li><a href="#">{message.body}</a></li>
-                )) : null
-            }
-        </ol>
-        <button className='text-center text-primary'> Message reçu</button>
-        <button className='titre text-center text-primary'> Message reçu</button>
-        <button className='titre text-center text-primary'> Message reçu</button>
-        <button className='titre text-center text-primary'> Message reçu</button>
+      <div className='d-flex flex-column form-control w-20' id='secondColumn' >
+         <div>
+          utilisateur selectionné :{ selectedUser?.username}
+           
+           
+            { messages.length > 0 ?
+               messages.map((message)=> 
+                   
+                    message.sender == selectedUser.username || message.receiver == selectedUser.username ? 
+                    (<div>{message.body}</div>): null
+                    
+                 ) : null
+             }
+        </div>
+        <div className='d-flex btn' id='footer w-100'>
+           <textarea className='text-center w-100'  placeholder='Votre Message ici'></textarea>
+           <button type='button' className='btn-primary' id='benv'>Envoi message</button>
+        </div>
       </div>
     </div>
   </main>

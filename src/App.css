@@ -58,3 +58,17 @@ p{
   justify-content: center;
   align-items: center;
 }
+
+#secondColumn{
+  width: 50%;
+}
+
+#benv{
+  width: auto;
+  height: auto;
+}
+#footer{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
