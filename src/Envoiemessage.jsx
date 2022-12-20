@@ -59,7 +59,9 @@ useEffect(() => {
   }
 
 , []);
-console.log(messages);
+useEffect(()=>{
+      recupererMessage(user.username)
+   },[selectedUser])
 return (
   <main className='border-10px'>
     <div className='d-flex form-control w-100'>
@@ -81,8 +83,8 @@ return (
            
             { messages.length > 0 ?
                messages.map((message)=> 
-                   
-                    message.sender == selectedUser.username || message.receiver == selectedUser.username ? 
+                
+                   message.sender == selectedUser.username || message.receiver == selectedUser.username ? 
                     (<div>{message.body}</div>): null
                     
                  ) : null

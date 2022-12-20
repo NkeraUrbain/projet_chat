@@ -13,7 +13,10 @@ let utilisateurs= ()=>{
           password: password,
         }),
       });
-    }
+    
+} catch (error) {
+  
+}
   }
 return{
 
